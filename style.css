@@ -22,3 +22,29 @@ canvas {
     width: 100%;
     height: 100%;
 }
+
+.wall {
+    height: calc(100% - 280px);
+    background-color: #fde3a7;
+    border-top: 80px solid #cc9861;
+    border-left: 200px solid #f1c27d;
+    border-right: 200px solid #f1c27d;
+    border-bottom: 200px solid #cc9861;
+}
+
+@media (max-width: 768px) {
+    .wall {
+        border-left: 150px solid #f1c27d;
+        border-right: 150px solid #f1c27d;
+    }
+}
+
+@media (max-width: 480px ) {
+    .wall {
+        height: calc(100% - 220px);
+        border-top: 70px solid #cc9861;
+        border-left: 50px solid #f1c27d;
+        border-right: 200px solid #f1c27d;
+        border-bottom: 150px solid #cc9861;
+    }
+} 
