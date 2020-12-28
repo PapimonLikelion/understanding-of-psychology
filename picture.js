@@ -23,5 +23,8 @@ export class Picture {
         ctx.beginPath();
         ctx.rect(this.xNameTagStart, this.yNameTagStart, this.nameTagWidth, this.nameTagHeight);
         ctx.stroke();
+
+        ctx.font = "13px Arial";
+        ctx.fillText("Hello World", this.xNameTagStart, this.yNameTagStart + this.nameTagHeight/2);
     }
 }
