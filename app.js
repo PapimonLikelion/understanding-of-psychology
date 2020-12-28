@@ -7,14 +7,26 @@ const description2 = document.getElementById("jsDescription2");
 const description3 = document.getElementById("jsDescription3");
 const singlePicture = document.getElementById("jsSinglePicture");
 const singlePictureBackBtn = document.getElementById("jsSinglePictureBackBtn");
+const pictureFrame = document.getElementById("jsSinglePictureFrame");
+
+import { Muller } from './muller.js';
+import { Ponzo } from './ponzo.js';
+import { Ehrenstein } from './ehrenstein.js';
 
 class App {
     constructor() {
         this.writeDescription();
-        picture1.addEventListener("click", this.clickPicture1);
-        picture2.addEventListener("click", this.clickPicture2);
-        picture3.addEventListener("click", this.clickPicture3);
+        picture1.addEventListener("click", this.clickPicture1.bind(this));
+        picture2.addEventListener("click", this.clickPicture2.bind(this));
+        picture3.addEventListener("click", this.clickPicture3.bind(this));
         singlePictureBackBtn.addEventListener("click", this.clickBack);
+
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        pictureFrame.appendChild(this.canvas);
+        this.muller = new Muller (description1.innerHTML);
+        this.ponzo = new Ponzo (description2.innerHTML);
+        this.ehrenstein = new Ehrenstein (description3.innerHTML);
     }
 
     writeDescription() {
@@ -26,16 +38,22 @@ class App {
     clickPicture1() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.muller.writeDescription();
+        this.muller.draw(this.ctx);
     }
 
     clickPicture2() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.ponzo.writeDescription();
+        this.ponzo.draw(this.ctx);
     }
 
     clickPicture3() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.ehrenstein.writeDescription();
+        this.ehrenstein.draw(this.ctx);
     }
 
     clickBack() {

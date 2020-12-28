@@ -44,7 +44,7 @@
 .singlePictureFrame {
     margin-left: 20%;
     margin-top: 80px;
-    width: calc(60% - 10px);
+    width: calc(60% - 5px);
     height: 60%;
     border: 10px inset #dd9700;
     outline: 10px outset #dd9700;
@@ -52,9 +52,9 @@
 
 .singlePictureDescription {
     margin-top: 50px;
-    margin-left: calc(41% - 2px);
-    width: 18%;
-    height: 15%;
+    margin-left: calc(50% - 101px);
+    width: 200px;
+    height: 10%;
     background-color: #f7d1a8;
     box-shadow: 2px 2px 2px;
     text-align: center;
@@ -64,4 +64,5 @@
 canvas {
     width: 100%;
     height: 100%;
+    background-color: #f7d1a8;
 }
