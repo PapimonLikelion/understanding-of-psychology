@@ -1,40 +1,19 @@
-import {
-    Wall
-} from './wall.js'
-
 class App {
     constructor() {
-        this.canvas = document.createElement('canvas');
-        document.body.appendChild(this.canvas);
-        this.ctx = this.canvas.getContext('2d');
+        this.picture1 = document.getElementById("jsPicture1");
+        this.picture2 = document.getElementById("jsPicture2");
+        this.picture3 = document.getElementById("jsPicture3");
+        this.description1 = document.getElementById("jsDescription1");
+        this.description2 = document.getElementById("jsDescription2");
+        this.description3 = document.getElementById("jsDescription3");
 
-        this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
-        
-        window.addEventListener("resize", this.resize.bind(this), false);
-        this.resize(); 
-
-        this.numberOfPictures = 3;
-        window.requestAnimationFrame(this.animate.bind(this));
+        this.writeDescription();
     }
 
-    resize() {
-        this.stageWidth = document.body.clientWidth;
-        this.stageHeight = document.body.clientHeight;
-
-        this.canvas.width = this.stageWidth * this.pixelRatio;
-        this.canvas.height = this.stageHeight * this.pixelRatio;
-        this.ctx.scale(this.pixelRatio, this.pixelRatio);
-
-        this.wall = new Wall(
-            this.canvas.width,
-            this.canvas.height,
-        )
-    }
-
-    animate() {
-        window.requestAnimationFrame(this.animate.bind(this));
-        this.wall.drawWall(this.ctx);
-        this.wall.drawPictureOnWall(this.ctx, this.numberOfPictures);
+    writeDescription() {
+        this.description1.innerHTML = "<br> Müller-Lyer Illusion <br> <strong> 1889 </strong>";
+        this.description2.innerHTML = "<br> Ponzo Illusion <br> <strong> 1911 </strong>";
+        this.description3.innerHTML = "<br> Ehrenstein Illusion <br> <strong> 1841 </strong>";
     }
 }
 

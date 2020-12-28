@@ -26,25 +26,112 @@ canvas {
 .wall {
     height: calc(100% - 280px);
     background-color: #fde3a7;
-    border-top: 80px solid #cc9861;
+    border-top: 80px solid #c68642;
     border-left: 200px solid #f1c27d;
     border-right: 200px solid #f1c27d;
-    border-bottom: 200px solid #cc9861;
+    border-bottom: 200px solid #c68642;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
+
+.work {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.work > .picture {
+    margin-top: 80px;
+    margin-left:15%;
+    width: calc(70% - 10px);
+    height: 35%;
+    background: #f7d1a8;
+    border: 10px inset #dd9700;
+    outline: 10px outset #dd9700;
+}
+
+.work > .description {
+    margin-top: 80px;
+    margin-left: calc(30% - 2px);
+    width: 40%;
+    height: 15%;
+    background-color: #f7d1a8;
+    box-shadow: 2px 2px 2px;
+    text-align: center;
+    font-size: 15px;
+}
+
+@media (max-width: 1080px) {
+    .wall {
+        border-left: 140px solid #f1c27d;
+        border-right: 140px solid #f1c27d;
+    }
+
+    .work > .picture {
+        margin-top: 160px;
+        margin-left: calc(15% - 10px);
+        width: 70%;
+        height: 20%;
+    }
+    
+    .work > .description {
+        margin-top: 80px;
+        margin-left: calc(25% - 2px);
+        width: 50%;
+        height: 13%;
+        font-size: 14px;
+    }
+}
+
 
 @media (max-width: 768px) {
     .wall {
-        border-left: 150px solid #f1c27d;
-        border-right: 150px solid #f1c27d;
+        border-left: 110px solid #f1c27d;
+        border-right: 110px solid #f1c27d;
+    }
+
+    .work > .picture {
+        margin-top: 160px;
+        margin-left: calc(15% - 7px);
+        width: 70%;
+        height: 20%;
+        border: 7px inset #dd9700;
+        outline: 7px outset #dd9700;
+    }
+    
+    .work > .description {
+        margin-top: 80px;
+        margin-left: calc(25% - 2px);
+        width: 50%;
+        height: 13%;
     }
 }
 
 @media (max-width: 480px ) {
     .wall {
         height: calc(100% - 220px);
-        border-top: 70px solid #cc9861;
+        border-top: 70px solid #c68642;
         border-left: 50px solid #f1c27d;
-        border-right: 200px solid #f1c27d;
-        border-bottom: 150px solid #cc9861;
+        border-right: 50px solid #f1c27d;
+        border-bottom: 150px solid #c68642;
+    }
+
+    .work > .picture {
+        margin-top: 180px;
+        margin-left: calc(11% - 3px);
+        width: 78%; 
+        height: 13%;
+        border: 3px inset #dd9700;
+        outline: 3px outset #dd9700;
+    }
+    
+    .work > .description {
+        margin-top: 50px;
+        margin-left: calc(20% - 2px);
+        width: 60%;
+        height: 10%;
+        font-size: 10px;
     }
 } 
