@@ -18,18 +18,13 @@ body {
     overflow: hidden;
 }
 
-canvas {
-    width: 100%;
-    height: 100%;
-}
-
 .wall {
-    height: calc(100% - 280px);
+    height: calc(100% - 260px);
     background-color: #fde3a7;
     border-top: 80px solid #c68642;
     border-left: 200px solid #f1c27d;
     border-right: 200px solid #f1c27d;
-    border-bottom: 200px solid #c68642;
+    border-bottom: 180px solid #c68642;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -50,6 +45,12 @@ canvas {
     background: #f7d1a8;
     border: 10px inset #dd9700;
     outline: 10px outset #dd9700;
+}
+
+.work > .picture:hover {
+    cursor: pointer;
+    background:darkgray;
+    /* opacity: 0.5; */
 }
 
 .work > .description {

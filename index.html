@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Optical Illusion Museum</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="wallStyle.css">
+        <link rel="stylesheet" href="singlePictureStyle.css">
     </head>
     <body>
-        <div class="wall">
+        <div class="wall" id="jsWall">
             <div class="work1 work">
                 <div class="picture1 picture" id="jsPicture1"></div>
                 <div class="descrpition1 description" id="jsDescription1"></div>
@@ -19,6 +20,18 @@
             <div class="work3 work">
                 <div class="picture3 picture" id="jsPicture3"></div>
                 <div class="descrpition3 description" id="jsDescription3"></div>
+            </div>
+        </div>
+        <div class="singlePicture" id="jsSinglePicture">
+            <div class="singlePictureBackBtn" id="jsSinglePictureBackBtn">
+                <div class="BackBtnTriangle"></div>
+                <div class="BackBtnBar"></div>
+            </div>
+            <div class="singlePictureFrame" id="jsSinglePictureFrame">
+
+            </div>
+            <div class="singlePictureDescription" id="jsSinglePictureDescription">
+
             </div>
         </div>
         <script src="app.js" type="module"></script>
