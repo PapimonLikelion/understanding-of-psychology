@@ -24,9 +24,9 @@ class App {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
         pictureFrame.appendChild(this.canvas);
-        this.muller = new Muller (description1.innerHTML);
-        this.ponzo = new Ponzo (description2.innerHTML);
-        this.ehrenstein = new Ehrenstein (description3.innerHTML);
+        this.muller = new Muller (description1.innerHTML, this.canvas, this.ctx);
+        this.ponzo = new Ponzo (description2.innerHTML, this.canvas, this.ctx);
+        this.ehrenstein = new Ehrenstein (description3.innerHTML, this.canvas, this.ctx);
     }
 
     writeDescription() {
@@ -35,25 +35,40 @@ class App {
         description3.innerHTML = "<br> Ehrenstein Illusion <br> <strong> 1841 </strong>";
     }
 
+    /** Muller 그리기 */
     clickPicture1() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.ponzo.stop();
+        this.ehrenstein.stop();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.beginPath();
         this.muller.writeDescription();
-        this.muller.draw(this.ctx);
+        this.muller.animate();
     }
 
+    /** Ponzo 그리기 */
     clickPicture2() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.muller.stop();
+        this.ehrenstein.stop();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.beginPath();
         this.ponzo.writeDescription();
-        this.ponzo.draw(this.ctx);
+        this.ponzo.animate();
     }
 
+    /** Ehrenstein 그리기 */
     clickPicture3() {
         wall.style.display = "none";
         singlePicture.style.display = "flex";
+        this.muller.stop();
+        this.ponzo.stop();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.beginPath();
         this.ehrenstein.writeDescription();
-        this.ehrenstein.draw(this.ctx);
+        this.ehrenstein.animate();
     }
 
     clickBack() {

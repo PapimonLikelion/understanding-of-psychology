@@ -21,10 +21,10 @@ body {
 .wall {
     height: calc(100% - 260px);
     background-color: #fde3a7;
-    border-top: 80px solid #c68642;
+    border-top: 80px solid #c48038;
     border-left: 200px solid #f1c27d;
     border-right: 200px solid #f1c27d;
-    border-bottom: 180px solid #c68642;
+    border-bottom: 180px solid #c48038;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
