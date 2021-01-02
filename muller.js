@@ -1,3 +1,4 @@
+const pictureFrame = document.getElementById("jsSinglePictureFrame");
 const pictureDescription = document.getElementById("jsSinglePictureDescription");
 
 export class Muller {
@@ -5,6 +6,7 @@ export class Muller {
         this.description = description;
         this.canvas = canvas;
         this.ctx = context;
+        this.isDown = false;
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
@@ -17,14 +19,27 @@ export class Muller {
         this.canvas.width = this.stageWidth * 2;
         this.canvas.height = this.stageHeight * 2;
         this.ctx.scale(2,2);
+        
+        this.animateInitialize();
     }
 
     writeDescription() {
         pictureDescription.innerHTML = this.description;
     }
 
+    animateInitialize() {
+        this.xUpLineStart = this.stageWidth * 5.5/16;
+        this.xUpLineEnd = this.stageWidth * 10.5/16;
+        this.yUpLine = this.stageHeight * 1/3;
+        
+        this.xBottomLineStart = this.stageWidth * 5.5/16;
+        this.xBottomLineEnd =  this.stageWidth * 10.5/16
+        this.yBottomLine = this.stageHeight * 2/3;
+    }
+
     animate() {
         this.handle = window.requestAnimationFrame(this.animate.bind(this));
+        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
         this.draw();
     }
 
@@ -43,13 +58,13 @@ export class Muller {
         /** 위에 배치될 선 밖의 원 */
         this.drawCircle(xTopLeftCircle, yTopCircle, radius);
         this.drawCircle(xTopRightCircle, yTopCircle, radius);
-        /** 위에 배치될 원 사이의 선 */
-        this.drawLine(xTopLeftCircle + radius, xTopRightCircle - radius, yTopCircle);
         /** 아래에 배치될 선 안의 원 */
         this.drawCircle(xBottomLeftCircle, yBottomCircle, radius);
         this.drawCircle(xBottomRightCircle, yBottomCircle, radius);
+        /** 위에 배치될 원 사이의 선 */
+        this.drawLine(this.xUpLineStart, this.xUpLineEnd, this.yUpLine);
         /** 아래에 배치될 원 사이의 선 */
-        this.drawLine(xBottomLeftCircle - radius, xBottomRightCircle + radius, yBottomCircle);
+        this.drawLine(this.xBottomLineStart, this.xBottomLineEnd, this.yBottomLine);
     }
 
     drawCircle(x, y, radius) {
@@ -67,5 +82,66 @@ export class Muller {
         this.ctx.moveTo(xStart, y);
         this.ctx.lineTo(xEnd, y);
         this.ctx.stroke();
+    }
+
+    convertX(beforeX) {
+        var afterX = (beforeX - this.stageWidth/5) * (10/6);
+        return afterX;
+    }
+
+    convertY(beforeY) {
+        var afterY = (beforeY - 90) * (10/6);
+        return afterY;
+    }
+
+    down(event) {
+        this.xAtDown = event.clientX;
+        this.yAtDown = event.clientY;
+        this.xConverted = this.convertX(this.xAtDown);
+        this.yConverted = this.convertY(this.yAtDown);
+        this.isDown = false;
+        this.moveUpLine = false;
+        this.moveBottomLine = false;
+        var yMargin = 10;
+
+        //위의 선을 선택했을 경우
+        if ((this.xUpLineStart <= this.xConverted) && (this.xConverted <= this.xUpLineEnd) && 
+            (this.yUpLine - yMargin <= this.yConverted) && (this.yConverted <= this.yUpLine + yMargin)) {
+            this.isDown = true;
+            this.moveUpLine = true;
+        }
+        
+        //아래의 선을 선택했을 경우
+        if ((this.xBottomLineStart <= this.xConverted) && (this.xConverted <= this.xBottomLineEnd) && 
+            (this.yBottomLine - yMargin <= this.yConverted) && (this.yConverted <= this.yBottomLine + yMargin)) {
+            this.isDown = true;
+            this.moveBottomLine = true;
+        }
+    }
+
+    move(event) {
+        if (this.isDown) {
+            //Canvas의 Width 와 Height를 60%로 줄인다음 div에 집어넣기 때문에 역으로 10/6 만큼 곱해서 위치 변화 인지할 것
+            var responsiveness = 10/6;
+            while ((this.xAtDown != event.clientX) || (this.yAtDown != event.clientY)) {
+                if (this.moveUpLine) {
+                    this.xUpLineStart = this.xUpLineStart - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
+                    this.xUpLineEnd = this.xUpLineEnd - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
+                    this.yUpLine = this.yUpLine - (this.yAtDown * responsiveness) + (event.clientY * responsiveness);
+                } else if (this.moveBottomLine) {
+                    this.xBottomLineStart = this.xBottomLineStart - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
+                    this.xBottomLineEnd = this.xBottomLineEnd - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
+                    this.yBottomLine = this.yBottomLine - (this.yAtDown * responsiveness) + (event.clientY * responsiveness);
+                }
+                this.xAtDown = event.clientX;
+                this.yAtDown = event.clientY;
+            }
+        }
+    }   
+
+    up(event) {
+        this.isDown = false;
+        this.moveUpLine = false;
+        this.moveBottomLine = false;
     }
 }

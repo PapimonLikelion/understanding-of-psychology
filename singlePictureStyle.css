@@ -44,7 +44,7 @@
 .singlePictureFrame {
     margin-left: 20%;
     margin-top: 80px;
-    width: calc(60% - 5px);
+    width: calc(60% - 10px);
     height: 60%;
     border: 10px inset #dd9700;
     outline: 10px outset #dd9700;
