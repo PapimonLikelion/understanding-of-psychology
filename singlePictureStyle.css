@@ -1,3 +1,28 @@
+.singlePictureInstruction {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.85;
+}
+
+.instruction {
+    display: block;
+    position: absolute;
+    top: calc(90px + 20%);
+    left: 30%;
+    width: 40%;
+    height: 20%;
+    background-color: #fde3a7;
+    text-align: center;
+    font-size: 20px;
+    opacity: 1;
+    transition: 0.5s ease-in;
+}
+
 .singlePicture {
     width: 100%;
     height: 100%;
@@ -42,9 +67,9 @@
 }
 
 .singlePictureFrame {
-    margin-left: 20%;
+    margin-left: calc(20% - 10px);
     margin-top: 80px;
-    width: calc(60% - 10px);
+    width: 60%;
     height: 60%;
     border: 10px inset #dd9700;
     outline: 10px outset #dd9700;

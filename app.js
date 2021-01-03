@@ -8,6 +8,8 @@ const description3 = document.getElementById("jsDescription3");
 const singlePicture = document.getElementById("jsSinglePicture");
 const singlePictureBackBtn = document.getElementById("jsSinglePictureBackBtn");
 const pictureFrame = document.getElementById("jsSinglePictureFrame");
+const mainInstruction = document.getElementById("jsMainInstruction");
+const enterButton = document.getElementById("jsEnterButton");
 
 import { Muller } from './muller.js';
 import { Ponzo } from './ponzo.js';
@@ -20,6 +22,7 @@ class App {
         picture2.addEventListener("click", this.clickPicture2.bind(this));
         picture3.addEventListener("click", this.clickPicture3.bind(this));
         singlePictureBackBtn.addEventListener("click", this.clickBack.bind(this));
+        enterButton.addEventListener("click", this.EnterMuseum);
 
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
@@ -30,6 +33,10 @@ class App {
         document.addEventListener('pointerdown', this.onDown.bind(this), false);
         document.addEventListener('pointermove', this.onMove.bind(this), false);
         document.addEventListener('pointerup', this.onUp.bind(this), false);
+    }
+
+    EnterMuseum() {
+        mainInstruction.style = "display: none";
     }
 
     writeDescription() {
@@ -62,6 +69,7 @@ class App {
         this.muller.writeDescription();
         this.muller.animateInitialize();
         this.muller.animate();
+        this.muller.showInstruction();
     }
 
     /** Ponzo 그리기 */
@@ -77,6 +85,7 @@ class App {
         this.ponzo.writeDescription();
         this.ponzo.animateInitialize();
         this.ponzo.animate();
+        this.ponzo.showInstruction();
     }
 
     /** Ehrenstein 그리기 */
@@ -92,6 +101,7 @@ class App {
         this.ehrenstein.writeDescription();
         this.ehrenstein.animateInitialize();
         this.ehrenstein.animate();
+        this.ehrenstein.showInstruction();
     }
 
     clickPictureDetail() {

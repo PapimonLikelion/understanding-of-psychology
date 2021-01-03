@@ -1,4 +1,9 @@
 const pictureDescription = document.getElementById("jsSinglePictureDescription");
+const pictureInstructionBackground = document.getElementById("jsSinglePictureInstruction");
+const pictureInstructionFrame = document.getElementById("jsInstuction");
+const pictureInstructionTitle = document.getElementById("jsInstructionTitle");
+const pictureInstructionColor = document.getElementById("jsInstructionColor");
+const pictureInstructionDetail = document.getElementById("jsInstructionDetail");
 
 export class Ponzo {
     constructor(description, canvas, context) {
@@ -7,10 +12,29 @@ export class Ponzo {
         this.ctx = context;
         this.isDown = false;
 
+        this.instructionTitle = "Ponzo Illusion";
+        this.instructionColor = "파란 선을";
+        this.instructionDetail = "드래그해서 같은 길이인지 직접 확인해보세요!";
+
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
     }
 
+    showInstruction() {
+        pictureInstructionBackground.style = "display : block";
+        pictureInstructionFrame.style = "display : block";
+        pictureInstructionTitle.innerText = this.instructionTitle;
+        pictureInstructionColor.innerText = this.instructionColor;
+        pictureInstructionColor.style = "color : blue";
+        pictureInstructionDetail.innerText = this.instructionDetail;
+        setTimeout(this.disappearInstruction, 3000);
+    }
+    
+    disappearInstruction() {
+        pictureInstructionBackground.style = "display:none";
+        pictureInstructionFrame.style = "display:none";
+    }
+    
     resize() {
         this.stageWidth = document.body.clientWidth;
         this.stageHeight = document.body.clientHeight;
