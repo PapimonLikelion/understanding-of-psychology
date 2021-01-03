@@ -4,6 +4,9 @@
 ## 🎁 배포 URL
 - https://optical-illusion.netlify.app/
 
+## 🎞 시연 영상
+- https://www.youtube.com/watch?v=sQeQT_HShTQ
+
 ## 🤞 구현할 기능 목록
 ### [박물관 벽 만들기]
 - css를 통해 입체감 있는 벽 구현하기
