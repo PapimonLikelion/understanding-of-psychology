@@ -30,9 +30,15 @@ class App {
 
         this.setPictureHandler();
 
+        /** PC version */
         document.addEventListener('pointerdown', this.onDown.bind(this), false);
         document.addEventListener('pointermove', this.onMove.bind(this), false);
         document.addEventListener('pointerup', this.onUp.bind(this), false);
+
+        /** Mobile Version */
+        document.addEventListener('touchstart', this.onDown.bind(this), false);
+        document.addEventListener('touchmove', this.onMove.bind(this), false);
+        document.addEventListener('touchend', this.onUp.bind(this), false);
     }
 
     EnterMuseum() {

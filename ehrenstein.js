@@ -112,9 +112,17 @@ export class Ehrenstein {
     }
 
     down(event) {
+        /** PC version */
+        if (event.clientX) {
+            this.xAtDown = event.clientX;
+            this.yAtDown = event.clientY;
+        } 
+        /** Mobile version */
+        else {
+            this.xAtDown = event.touches[0].clientX;
+            this.yAtDown = event.touches[0].clientY;
+        }
         this.isDown = false;
-        this.xAtDown = event.clientX;
-        this.yAtDown = event.clientY;
         this.xConverted = this.convertX(this.xAtDown);
         this.yConverted = this.convertY(this.yAtDown);
         //정사각형 안의 범위를 선택한 경우
@@ -128,16 +136,37 @@ export class Ehrenstein {
 
     move(event) {
         if(this.isDown) {
-            //Canvas의 Width 와 Height를 60%로 줄인다음 div에 집어넣기 때문에 역으로 10/6 만큼 곱해서 위치 변화 인지할 것
-            var responsiveness = 10/6;
-            while ((this.xAtDown != event.clientX) || (this.yAtDown != event.clientY)) {
-                this.xCenter = this.xCenter - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
-                this.yCenter = this.yCenter - (this.yAtDown * responsiveness) + (event.clientY * responsiveness);
-                this.xAtDown = event.clientX;
-                this.yAtDown = event.clientY;
+            if (event.clientX ) {
+                this.movePC(event);
+            } else {
+                this.moveMobile(event);
             }
         }
     }   
+
+    movePC(event) {
+        //Canvas의 Width 와 Height를 60%로 줄인다음 div에 집어넣기 때문에 역으로 10/6 만큼 곱해서 위치 변화 인지할 것
+        var responsiveness = 10/6;
+        /** PC version */
+        while ((this.xAtDown != event.clientX) || (this.yAtDown != event.clientY)) {
+            this.xCenter = this.xCenter - (this.xAtDown * responsiveness) + (event.clientX * responsiveness);
+            this.yCenter = this.yCenter - (this.yAtDown * responsiveness) + (event.clientY * responsiveness);
+            this.xAtDown = event.clientX;
+            this.yAtDown = event.clientY;
+        }
+    }
+
+    moveMobile(event) {
+        //Canvas의 Width 와 Height를 60%로 줄인다음 div에 집어넣기 때문에 역으로 10/6 만큼 곱해서 위치 변화 인지할 것
+        var responsiveness = 10/6;
+        /** Mobile version */
+        while ((this.xAtDown != event.touches[0].clientX) || (this.yAtDown != event.touches[0].clientY)) {
+            this.xCenter = this.xCenter - (this.xAtDown * responsiveness) + (event.touches[0].clientX * responsiveness);
+            this.yCenter = this.yCenter - (this.yAtDown * responsiveness) + (event.touches[0].clientY * responsiveness);
+            this.xAtDown = event.touches[0].clientX;
+            this.yAtDown = event.touches[0].clientY;
+        }
+    }    
 
     up(event) {
         this.isDown = false;
